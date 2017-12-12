@@ -228,6 +228,21 @@ function getRecommendations(latlng, radius){
         cityCircle.setMap(null);
     }
 
+    var radius = Number(document.getElementById("search-radius").value);
+    if (radius == 0){
+        radius = 5000;
+    }
+    console.log('radius: '+ radius);
+    var limit = Number(document.getElementById("search-limit").value);
+    if (limit == 0){
+        limit = 10;
+    }
+    console.log('limit: '+limit);
+    var query = document.getElementById("search-query").value;
+    if (query == null){
+        query = 'restaurant';
+    }
+
     cityCircle = new google.maps.Circle({
         strokeColor: '#FF0000',
         strokeOpacity: 0.8,
@@ -241,7 +256,7 @@ function getRecommendations(latlng, radius){
 
     var foursquareURL = 'https://api.foursquare.com/v2/venues/explore?ll='+ latlng.lat() + ',' + latlng.lng() + '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=20160118' +
         //'&query=' + "sushi" +
-        "&radius=" + radius + "&limit=10";
+        "&radius=" + radius + "&limit=" + limit + "&query=" + query;
     recommendations.forEach(function(recommendation){
         recommendation.marker.setMap(null)
     });
