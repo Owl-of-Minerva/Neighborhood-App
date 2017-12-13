@@ -222,7 +222,7 @@ function getPlaceDetails(marker, infowindow) {
     })
 }
 
-function getRecommendations(latlng, radius){
+function getRecommendations(latlng){
 
     if(cityCircle){
         cityCircle.setMap(null);
@@ -266,6 +266,7 @@ function getRecommendations(latlng, radius){
         for (var i = 0; i < results.length; i++){
             recommendations.push(new Recommendation(results[i].venue));
         }
+        console.log('returning ' + recommendations.length + ' results');
         return recommendations;
     }).fail(function() {
         alert("Error")
@@ -274,8 +275,7 @@ function getRecommendations(latlng, radius){
 
 function viewModel(){
     var self = this;
-
-    this.searchTerm = ko.observable("aaaaa");
+    this.display_info = ko.observable("");
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 37.391884, lng: -122.014869},
         zoom: 13
@@ -286,7 +286,7 @@ function viewModel(){
 
     this.locationList = ko.observableArray([]);
     this.recommendationList = ko.observableArray([]);
-
+    //this.recommendationList = [];
     initialLocations.forEach(function(location){
         self.locationList.push(new Marker(location));
     });
@@ -298,15 +298,15 @@ function viewModel(){
             console.log("clearing the recommendation");
             self.recommendationList[i].setMap(null);
         }
-        //self.recommendationList = ko.observableArray([]);
+        self.recommendationList([]);
         console.log("number of elements:" + self.recommendationList.length)
         console.log("clicked point lat: " + event.latLng.lat());
         console.log("clicked point lng: " + event.latLng.lng());
-        recommendatsions = getRecommendations(event.latLng, 5000);
-       // recommendatsions.forEach(function(recommendation){
-         //   self.recommendationList.push(recommendation);
-        //})
-        console.log("number of elements afterwards:" + self.recommendationList.length);
+        self.recommendationList(getRecommendations(event.latLng));
+        console.log("afterwards: "+self.recommendationList.length);
+        setTimeout(function(){
+            self.display_info("Total of "+ recommendations.length + " results displayed");
+        }, 1000);
 
     });
     map.fitBounds(bounds);

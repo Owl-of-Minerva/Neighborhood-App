@@ -1,11 +1,13 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
-    <div class="options-box">
+    <div class="row">
+        <div class="options-box col-md-4">
         <h1>Find Your Bay Area Cuisine</h1>
         <div>
             <input id="show-listings" type="button" value="Show Default Listings">
@@ -42,12 +44,14 @@
             <span class="text">Query</span> <input id="search-query" type="text">
             <br>
             <input id="api-parameter" type="button" value="Set Parameters">
+            <br>
+            <div data-bind="text: display_info"></div>
         </div>
 
+    </div>
 
-
-
-    <div id="map"></div>
+        <div id="map" class="col-md-8"></div>
+    </div>
 </div>
 
 <script src="js/lib/knockout-3.2.0.js"></script>
