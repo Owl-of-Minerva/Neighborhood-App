@@ -1,6 +1,8 @@
 var map;
 var infoWindow;
 var bounds;
+
+// a list of default locations that will automatically displayed
 var initialLocations = [
     {
         title: 'Tasty Subs & Pizza',
@@ -50,6 +52,13 @@ var initialLocations = [
         place_id: 'ChIJ-0RVcTS3j4ARDEqD2bNEFrc',
         types: ['restaurant', 'bar'],
         cuisine: 'indian'
+    },
+    {
+        title: "Passage to India",
+        position: {lat: 37.394356, lng: -122.099594},
+        place_id: 'ChIJPwgBGLmwj4ARdFm9VCwWsA8',
+        types: ['bakery'],
+        cuisine: 'indian'
     }
 ];
 var client_id = "Y5XLAEJLUKQV5FL0BJUUDLQDGPUIMXLM22MRLHDP5CEJJ0RC";
@@ -57,6 +66,7 @@ var client_secret = "B1WLMXVULLD2XIQOYCWO4AZO11S4SZ5ZWQ4YGSHMXFEYPBTB";
 var recommendations = [];
 var cityCircle;
 
+// Model for the default location lists
 var Marker = function(data){
     var self = this;
     function makeMarkerIcon(markerColor){
@@ -101,6 +111,7 @@ var Marker = function(data){
 
 }
 
+// Model for customized location result
 var Recommendation = function(data){
     var self = this;
     function makeMarkerIcon(markerColor){
@@ -114,17 +125,16 @@ var Recommendation = function(data){
         return markerImage;
     }
 
+    this.address = data.location.address;
+    this.id = data.id;
     var highlightedIcon = makeMarkerIcon('FFFF24');
     var defaultIcon = makeMarkerIcon('ff0000');
-    console.log(data.location.lat);
-    console.log(data.location.lng);
-    console.log(data.name);
     this.marker = new google.maps.Marker({
         position: {lat: data.location.lat, lng: data.location.lng},
-        //position: {lat: 59.327, lng: 18.067},
         title: data.name,
         icon: defaultIcon,
         animation: google.maps.Animation.DROP,
+        formatted_address: data.location.formattedAddress,
         map: map
     });
 
@@ -139,23 +149,28 @@ var Recommendation = function(data){
     });
 
     this.marker.addListener('click', function(){
-        //populateInfoWindow(this, infoWindow);
-        getPlaceDetails(this, infoWindow);
+        console.log("clicked");
+        getRecommendationDetails(this, infoWindow);
     });
 
+
 }
+
+// hide all the markers from default list
 function hideList(locations){
     locations.forEach(function(location){
         location.marker.setMap(null);
     })
 }
 
+// show all the markers from default list
 function showList(locations){
     locations.forEach(function(location){
         location.marker.setMap(map);
     })
 }
 
+// filter the default markers according to category
 function filterListCategory(locations, category)
 {
     locations.forEach(function(location){
@@ -168,6 +183,7 @@ function filterListCategory(locations, category)
     })
 }
 
+// filter the default markers according to cuisine
 function filterListCuisine(locations, cuisine){
     locations.forEach(function(location){
         if(location.marker.cuisine == cuisine){
@@ -179,6 +195,7 @@ function filterListCuisine(locations, cuisine){
     })
 }
 
+// call google map api to get details for the specific marker
 function getPlaceDetails(marker, infowindow) {
 
     var service = new google.maps.places.PlacesService(map);
@@ -222,27 +239,62 @@ function getPlaceDetails(marker, infowindow) {
     })
 }
 
+
+
+
+function getRecommendationDetails(marker, infowindow) {
+    infoWindow.marker = marker;
+    var innerHTML = '<div>'
+        if (marker.title){
+            innerHTML += '<strong>' + marker.title + '</strong>';
+        }
+        if (marker.formatted_address){
+            innerHTML += '<br>' + marker.formatted_address;
+        }
+        if(marker.formatted_phone_number){
+            innerHTML += '<br>' + marker.formatted_phone_number;
+        }
+        if (marker.hours) {
+            innerHTML += '<br>' + marker.hours;
+        }
+        if (marker.photos) {
+            innerHTML += '<br><br><img src="' + marker.photos[0].getUrl(
+                {maxHeight: 100, maxWidth: 200}) + '">';
+        }
+        innerHTML += '</div>';
+        infowindow.setContent(innerHTML);
+        infowindow.open(map, marker);
+        infowindow.addListener('closedclick', function(){
+            infowindow.marker = null;
+        });
+}
+// call the foursquare api to get recommendations according to user input
 function getRecommendations(latlng){
 
     if(cityCircle){
         cityCircle.setMap(null);
     }
 
+    // get search radius from user input
     var radius = Number(document.getElementById("search-radius").value);
     if (radius == 0){
         radius = 5000;
     }
-    console.log('radius: '+ radius);
+
+    // get number of limit from user input
     var limit = Number(document.getElementById("search-limit").value);
     if (limit == 0){
         limit = 10;
     }
-    console.log('limit: '+limit);
+
+    // get query from user input
     var query = document.getElementById("search-query").value;
     if (query == null){
         query = 'restaurant';
     }
 
+    // draw circle and center will be the place user clicked on the map
+    // the radius will be from user input
     cityCircle = new google.maps.Circle({
         strokeColor: '#FF0000',
         strokeOpacity: 0.8,
@@ -254,25 +306,29 @@ function getRecommendations(latlng){
         radius: radius
     });
 
-    var foursquareURL = 'https://api.foursquare.com/v2/venues/explore?ll='+ latlng.lat() + ',' + latlng.lng() + '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=20160118' +
-        //'&query=' + "sushi" +
+    var foursquareURL = 'https://api.foursquare.com/v2/venues/explore?ll='+ latlng.lat() + ',' + latlng.lng()
+        + '&client_id=' + client_id + '&client_secret=' + client_secret + '&v=20160118' +
         "&radius=" + radius + "&limit=" + limit + "&query=" + query;
+
+    // clear out previous results
     recommendations.forEach(function(recommendation){
         recommendation.marker.setMap(null)
     });
     recommendations = [];
+
+    //get new results
     $.getJSON(foursquareURL).done(function(data) {
         var results = data.response.groups[0].items;
         for (var i = 0; i < results.length; i++){
             recommendations.push(new Recommendation(results[i].venue));
         }
-        console.log('returning ' + recommendations.length + ' results');
         return recommendations;
     }).fail(function() {
         alert("Error")
         });
 }
 
+// view model part
 function viewModel(){
     var self = this;
     this.display_info = ko.observable("");
@@ -286,24 +342,19 @@ function viewModel(){
 
     this.locationList = ko.observableArray([]);
     this.recommendationList = ko.observableArray([]);
-    //this.recommendationList = [];
     initialLocations.forEach(function(location){
         self.locationList.push(new Marker(location));
     });
 
 
     google.maps.event.addListener(map, 'click', function(event) {
-        console.log("number of elements previously: " + self.recommendationList.length);
+        //clearing the previous results
         for (var i = 0; i < self.recommendationList.length; i++){
-            console.log("clearing the recommendation");
             self.recommendationList[i].setMap(null);
         }
         self.recommendationList([]);
-        console.log("number of elements:" + self.recommendationList.length)
-        console.log("clicked point lat: " + event.latLng.lat());
-        console.log("clicked point lng: " + event.latLng.lng());
         self.recommendationList(getRecommendations(event.latLng));
-        console.log("afterwards: "+self.recommendationList.length);
+        //show total number of results returned by API call
         setTimeout(function(){
             self.display_info("Total of "+ recommendations.length + " results displayed");
         }, 1000);
