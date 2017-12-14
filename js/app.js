@@ -296,28 +296,10 @@ function getRecommendationDetails(marker, infowindow) {
     });
 }
 // call the foursquare api to get recommendations according to user input
-function getRecommendations(latlng){
+function getRecommendations(latlng, radius, limit, query){
 
     if(cityCircle){
         cityCircle.setMap(null);
-    }
-
-    // get search radius from user input
-    var radius = Number(document.getElementById("search-radius").value);
-    if (radius == 0){
-        radius = 5000;
-    }
-
-    // get number of limit from user input
-    var limit = Number(document.getElementById("search-limit").value);
-    if (limit == 0){
-        limit = 10;
-    }
-
-    // get query from user input
-    var query = document.getElementById("search-query").value;
-    if (query == null){
-        query = 'restaurant';
     }
 
     // draw circle and center will be the place user clicked on the map
@@ -330,7 +312,7 @@ function getRecommendations(latlng){
         fillOpacity: 0.35,
         map: map,
         center: latlng,
-        radius: radius
+        radius: Number(radius)
     });
 
     var foursquareURL = 'https://api.foursquare.com/v2/venues/explore?ll='+ latlng.lat() + ',' + latlng.lng()
@@ -374,7 +356,9 @@ function viewModel(){
     this.selectedCategory = ko.observable("");
     this.cuisineOptions = ko.observableArray(['chinese', 'indian', 'korean', 'american']);
     this.selectedCuisine = ko.observable("");
-
+    this.radius=ko.observable(5000);
+    this.limit=ko.observable(10);
+    this.query=ko.observable("restaurant");
 
     initialLocations.forEach(function(location){
         self.locationList.push(new Marker(location));
@@ -388,7 +372,7 @@ function viewModel(){
             self.recommendationList[i].setMap(null);
         }
         self.recommendationList([]);
-        self.recommendationList(getRecommendations(event.latLng));
+        self.recommendationList(getRecommendations(event.latLng, self.radius(), self.limit(), self.query()));
     });
     map.fitBounds(bounds);
 
