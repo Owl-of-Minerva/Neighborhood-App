@@ -429,7 +429,9 @@ function startApp(){
     ko.applyBindings(new viewModel());
 }
 
-
+function mapError(){
+    alert("Error when loading the map");
+}
 
 
 

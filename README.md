@@ -4,6 +4,13 @@ Neighborhood App
 This project is an application featuring a map of bay area. On the map, a default list of restaurants  will be displayed. Users can apply filters like category and cuisine to see filtered results. Users can also input search criteria and click on a spcecific point on the map. Results will be displayed with certain region.
 
 ###
+Open Web App
+
+Keep everything in its original location. 
+Open index.html with any browser and the map and other information will be loaded and displayed.
+
+
+###
 Functionnality
 
 After loading the page, a default list of restaurants will be displayed both on the map and on the option box.
@@ -25,3 +32,4 @@ Users can specify the search radius, venue type and number of results. After tha
 Third Party API Used
 
 Foursquare venue recommendation  
+
