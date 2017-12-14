@@ -115,6 +115,10 @@ var Marker = function(data){
     });
 
     this.marker.addListener('click', function(){
+        self.marker.setAnimation(google.maps.Animation.BOUNCE);
+        window.setTimeout(function () {
+            self.marker.setAnimation(null);
+        }, 2000);
         getPlaceDetails(this, infoWindow);
     });
 
@@ -126,6 +130,9 @@ var Marker = function(data){
         }
         else {
             self.marker.setAnimation(google.maps.Animation.BOUNCE);
+            window.setTimeout(function () {
+                self.marker.setAnimation(null);
+            }, 2000);
             getPlaceDetails(self.marker, infoWindow);
         }
 
@@ -171,7 +178,10 @@ var Recommendation = function(data){
     });
 
     this.marker.addListener('click', function(){
-        console.log("clicked");
+        self.marker.setAnimation(google.maps.Animation.BOUNCE);
+        window.setTimeout(function () {
+            self.marker.setAnimation(null);
+        }, 2000);
         getRecommendationDetails(this, infoWindow);
     });
 
