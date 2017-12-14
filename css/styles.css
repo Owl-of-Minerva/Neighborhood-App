@@ -36,35 +36,13 @@ hr {
     background: #fff;
     border: 1px solid #999;
     border-radius: 3px;
-    height: 100%;
     line-height: 35px;
     text-align: left;
 }
 
-#pano {
-    width: 200px;
-    height: 200px;
-}
 
-#places-search,
-#search-within-time-text {
-    width: 84%;
-}
 
 .text {
     font-size: 12px;
 }
 
-#toggle-drawing {
-    width: 27%;
-    position: relative;
-    margin-left: 10px;
-}
-
-#zoom-to-area-text {
-    width: 70%;
-}
-
-#zoom-to-area {
-    width: 24%;
-}

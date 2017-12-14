@@ -1,6 +1,7 @@
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
 </head>
@@ -9,29 +10,26 @@
     <div class="row">
         <div class="options-box col-md-4">
         <h1>Find Your Bay Area Cuisine</h1>
-        <div>
-            <input id="show-listings" type="button" value="Show Default Listings">
-            <input id="hide-listings" type="button" value="Hide Default Listings">
-        </div>
-        <div>
-            <span class="text"> Category</span>
-            <select id="category-selection">
-                <option value="bakery">Bakery</option>
-                <option value="bar">Bar</option>
-                <option value="cafe">Cafe</option>
-                <option value="restaurant">Restaurant</option>
-            </select>
-            <input id="filter-listings-category" type="button" value="Filter Default Listings">
-            <br>
-            <span class="text"> Cuisine</span>
-            <select id="cuisine-selection">
-                <option value="chinese">Chinese</option>
-                <option value="indian">Indian</option>
-                <option value="korean">Korean</option>
-                <option value="american">American</option>
-            </select>
-            <input id="filter-listings-cuisine" type="button" value="Filter Default Listings">
-        </div>
+            <div>
+            <input data-bind="click: showDefaultList"  type="button" value="Show Default Listings">
+            <input data-bind="click: hideDefaultList" type="button" value="Hide Default Listings">
+            </div>
+            <div>
+                <ul data-bind="foreach: locationList">
+                    <li data-bind="text: name, click: createAnimation"></li>
+                </ul>
+            </div>
+            <div>
+                <span class="text"> Category</span>
+                <select data-bind="options: categoryOptions, value: selectedCategory">
+                </select>
+                <input data-bind="click: filterByCategory" id="filter-listings-category" type="button" value="Filter Default Listings">
+                <br>
+                <span class="text"> Cuisine</span>
+                <select data-bind="options: cuisineOptions, value: selectedCuisine">
+                </select>
+                <input data-bind="click: filterByCuisine" type="button" value="Filter Default Listings">
+            </div>
 
 <hr>
         <div>

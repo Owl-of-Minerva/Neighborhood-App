@@ -9,56 +9,64 @@ var initialLocations = [
         position: {lat: 37.383162, lng: -121.995069},
         place_id: 'ChIJ9YoEpR-2j4ARO_aEnQAFS70',
         types: ['restaurant'],
-        cuisine: 'indian'
+        cuisine: 'indian',
+        visibility: true
     },
     {
         title: "Inchin's Bamboo Garden",
         position: {lat: 37.376281, lng: -122.031072},
         place_id: 'ChIJDRdgSly2j4ARagXDhT9yhrQ',
         types: ['restaurant'],
-        cuisine: 'indian'
+        cuisine: 'indian',
+        visibility: true
     },
     {
         title: "Sliderbar",
         position: {lat: 37.446152,lng: -122.160983},
         place_id: 'ChIJ-VM9uzm7j4ARA3OpSuevYAA',
         types: ['restaurant', 'cafe', 'bar'],
-        cuisine: 'american'
+        cuisine: 'american',
+        visibility: true
     },
     {
         title: "Madras Cafe",
         position: {lat: 37.374284, lng: -122.054956},
         place_id: 'ChIJlbIO1Oi2j4ARp17Uf24xkHk',
         types: ['restaurant', 'cafe'],
-        cuisine: 'indian'
+        cuisine: 'indian',
+        visibility: true
     },
     {
         title: "Jang Su Jang",
         position: {lat: 37.353713, lng: -121.994364},
         place_id: 'ChIJR-8-Fva1j4ARNOEp6OoFzKs',
         types: ['restaurant'],
-        cuisine: 'korean'
+        cuisine: 'korean',
+        visibility: true
     },
     {
         title: "Taste Good Beijing",
         position: {lat: 37.429539, lng: -121.907570},
         place_id: 'ChIJTRaT5inJj4ARQ6Z6L6nH_2Q',
         types: ['restaurant'],
-        cuisine: 'chinese'
+        cuisine: 'chinese',
+        visibility: true
     },
     {
         title: "Mantra India",
         position: {lat: 37.392889, lng: -122.079855},
         place_id: 'ChIJ-0RVcTS3j4ARDEqD2bNEFrc',
         types: ['restaurant', 'bar'],
-        cuisine: 'indian'
+        cuisine: 'indian',
+        visibility: true
     },
     {
         title: "Passage to India",
         position: {lat: 37.394356, lng: -122.099594},
         place_id: 'ChIJPwgBGLmwj4ARdFm9VCwWsA8',
         types: ['bakery'],
-        cuisine: 'indian'
+        cuisine: 'indian',
+        visibility: true
     }
 ];
 var client_id = "Y5XLAEJLUKQV5FL0BJUUDLQDGPUIMXLM22MRLHDP5CEJJ0RC";
@@ -83,6 +91,8 @@ var Marker = function(data){
     var highlightedIcon = makeMarkerIcon('FFFF24');
     var defaultIcon = makeMarkerIcon('0091ff');
 
+    this.visibility = true;
+    this.name = data.title;
     this.marker = new google.maps.Marker({
         position: data.position,
         title: data.title,
@@ -105,9 +115,21 @@ var Marker = function(data){
     });
 
     this.marker.addListener('click', function(){
-        //populateInfoWindow(this, infoWindow);
         getPlaceDetails(this, infoWindow);
     });
+
+    this.createAnimation = function (){
+        if (self.marker.getAnimation() !== null) {
+            self.marker.setAnimation(null);
+            infoWindow.marker = null;
+            infoWindow.close();
+        }
+        else {
+            self.marker.setAnimation(google.maps.Animation.BOUNCE);
+            getPlaceDetails(self.marker, infoWindow);
+        }
+
+    }
 
 }
 
@@ -171,8 +193,7 @@ function showList(locations){
 }
 
 // filter the default markers according to category
-function filterListCategory(locations, category)
-{
+function filterListCategory(locations, category) {
     locations.forEach(function(location){
         if (location.marker.types.indexOf(category)>=0){
             location.marker.setMap(map);
@@ -199,7 +220,6 @@ function filterListCuisine(locations, cuisine){
 function getPlaceDetails(marker, infowindow) {
 
     var service = new google.maps.places.PlacesService(map);
-    console.log(marker.place_id);
     service.getDetails({
         placeId: marker.place_id
     }, function(place, status){
@@ -239,34 +259,31 @@ function getPlaceDetails(marker, infowindow) {
     })
 }
 
-
-
-
 function getRecommendationDetails(marker, infowindow) {
     infoWindow.marker = marker;
     var innerHTML = '<div>'
-        if (marker.title){
-            innerHTML += '<strong>' + marker.title + '</strong>';
-        }
-        if (marker.formatted_address){
-            innerHTML += '<br>' + marker.formatted_address;
-        }
-        if(marker.formatted_phone_number){
-            innerHTML += '<br>' + marker.formatted_phone_number;
-        }
-        if (marker.hours) {
-            innerHTML += '<br>' + marker.hours;
-        }
-        if (marker.photos) {
-            innerHTML += '<br><br><img src="' + marker.photos[0].getUrl(
-                {maxHeight: 100, maxWidth: 200}) + '">';
-        }
-        innerHTML += '</div>';
-        infowindow.setContent(innerHTML);
-        infowindow.open(map, marker);
-        infowindow.addListener('closedclick', function(){
-            infowindow.marker = null;
-        });
+    if (marker.title){
+        innerHTML += '<strong>' + marker.title + '</strong>';
+    }
+    if (marker.formatted_address){
+        innerHTML += '<br>' + marker.formatted_address;
+    }
+    if(marker.formatted_phone_number){
+        innerHTML += '<br>' + marker.formatted_phone_number;
+    }
+    if (marker.hours) {
+        innerHTML += '<br>' + marker.hours;
+    }
+    if (marker.photos) {
+        innerHTML += '<br><br><img src="' + marker.photos[0].getUrl(
+            {maxHeight: 100, maxWidth: 200}) + '">';
+    }
+    innerHTML += '</div>';
+    infowindow.setContent(innerHTML);
+    infowindow.open(map, marker);
+    infowindow.addListener('closedclick', function(){
+        infowindow.marker = null;
+    });
 }
 // call the foursquare api to get recommendations according to user input
 function getRecommendations(latlng){
@@ -325,7 +342,7 @@ function getRecommendations(latlng){
         return recommendations;
     }).fail(function() {
         alert("Error")
-        });
+    });
 }
 
 // view model part
@@ -342,8 +359,16 @@ function viewModel(){
 
     this.locationList = ko.observableArray([]);
     this.recommendationList = ko.observableArray([]);
+    this.filterList = ko.observableArray([])
+    this.categoryOptions = ko.observableArray(['bakery', 'bar', 'cafe', 'restaurant']);
+    this.selectedCategory = ko.observable("");
+    this.cuisineOptions = ko.observableArray(['chinese', 'indian', 'korean', 'american']);
+    this.selectedCuisine = ko.observable("");
+
+
     initialLocations.forEach(function(location){
         self.locationList.push(new Marker(location));
+
     });
 
 
@@ -361,33 +386,63 @@ function viewModel(){
 
     });
     map.fitBounds(bounds);
-    var hide = document.getElementById('hide-listings');
-    var show = document.getElementById('show-listings');
-    var filterCategory = document.getElementById('filter-listings-category');
-    var filterCuisine = document.getElementById('filter-listings-cuisine');
 
-    hide.addEventListener('click', function(){
-        hideList(self.locationList());
-    });
+    this.hideDefaultList = function(){
+        self.locationList().forEach(function(location){
+            location.marker.setMap(null);
+        });
+    }
 
-    show.addEventListener('click', function () {
-        showList(self.locationList());
-    })
+    this.showDefaultList = function(){
+        self.locationList().forEach(function(location){
+            location.marker.setMap(map);
+        })
+    }
 
-    filterCategory.addEventListener('click', function(){
-        var category = document.getElementById('category-selection').value;
-        filterListCategory(self.locationList(),category);
-    })
-    filterCuisine.addEventListener('click', function(){
-        var cuisine = document.getElementById('cuisine-selection').value;
-        filterListCuisine(self.locationList(), cuisine);
-    })
+    this.filterByCategory = function(){
+        self.locationList().forEach(function(location){
+            if (location.marker.types.indexOf(self.selectedCategory())>=0){
+                location.marker.setMap(map);
+                location.visibility = true;
+            }
+            else {
+                location.marker.setMap(null);
+                location.visibility = false;
+            }
+        })
+    }
+
+    this.filterByCuisine= function(){
+        self.locationList().forEach(function(location){
+            if (location.marker.types.indexOf(self.selectedCategory())>=0){
+                location.marker.setMap(map);
+                location.visibility = true;
+            }
+            else {
+                location.marker.setMap(null);
+                location.visibility = false;
+            }
+        })
+    }
+
+    this.filterByCuisine= function(){
+        self.locationList().forEach(function(location){
+            if (location.marker.cuisine == self.selectedCuisine()){
+                location.marker.setMap(map);
+                location.visibility = true;
+            }
+            else {
+                location.marker.setMap(null);
+                location.visibility = false;
+            }
+        })
+    }
+
 }
 
 function startApp(){
     ko.applyBindings(new viewModel());
 }
-
 
 
 
