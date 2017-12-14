@@ -15,15 +15,19 @@
             <input data-bind="click: hideDefaultList" type="button" value="Hide Default Listings">
             </div>
             <div>
+                <div>
                 <ul data-bind="foreach: locationList">
-                    <li data-bind="text: name, click: createAnimation"></li>
+                    <!-- ko if: visibility-->
+                        <li data-bind="text: name, click: createAnimation"></li>
+                    <!-- /ko -->
                 </ul>
+                </div>
             </div>
             <div>
                 <span class="text"> Category</span>
                 <select data-bind="options: categoryOptions, value: selectedCategory">
                 </select>
-                <input data-bind="click: filterByCategory" id="filter-listings-category" type="button" value="Filter Default Listings">
+                <input data-bind="click: filterByCategory" type="button" value="Filter Default Listings">
                 <br>
                 <span class="text"> Cuisine</span>
                 <select data-bind="options: cuisineOptions, value: selectedCuisine">

@@ -91,7 +91,7 @@ var Marker = function(data){
     var highlightedIcon = makeMarkerIcon('FFFF24');
     var defaultIcon = makeMarkerIcon('0091ff');
 
-    this.visibility = true;
+    this.visibility = ko.observable(true);
     this.name = data.title;
     this.marker = new google.maps.Marker({
         position: data.position,
@@ -379,23 +379,20 @@ function viewModel(){
         }
         self.recommendationList([]);
         self.recommendationList(getRecommendations(event.latLng));
-        //show total number of results returned by API call
-        setTimeout(function(){
-            self.display_info("Total of "+ recommendations.length + " results displayed");
-        }, 1000);
-
     });
     map.fitBounds(bounds);
 
     this.hideDefaultList = function(){
         self.locationList().forEach(function(location){
             location.marker.setMap(null);
+            location.visibility(false);
         });
     }
 
     this.showDefaultList = function(){
         self.locationList().forEach(function(location){
             location.marker.setMap(map);
+            location.visibility(true);
         })
     }
 
@@ -403,24 +400,11 @@ function viewModel(){
         self.locationList().forEach(function(location){
             if (location.marker.types.indexOf(self.selectedCategory())>=0){
                 location.marker.setMap(map);
-                location.visibility = true;
+                location.visibility(true);
             }
             else {
                 location.marker.setMap(null);
-                location.visibility = false;
-            }
-        })
-    }
-
-    this.filterByCuisine= function(){
-        self.locationList().forEach(function(location){
-            if (location.marker.types.indexOf(self.selectedCategory())>=0){
-                location.marker.setMap(map);
-                location.visibility = true;
-            }
-            else {
-                location.marker.setMap(null);
-                location.visibility = false;
+                location.visibility(false);
             }
         })
     }
@@ -429,14 +413,15 @@ function viewModel(){
         self.locationList().forEach(function(location){
             if (location.marker.cuisine == self.selectedCuisine()){
                 location.marker.setMap(map);
-                location.visibility = true;
+                location.visibility(true);
             }
             else {
                 location.marker.setMap(null);
-                location.visibility = false;
+                location.visibility(false);
             }
         })
     }
+
 
 }
 
