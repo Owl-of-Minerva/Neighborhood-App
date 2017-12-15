@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1904193e-b34b-4a37-ba19-ec62755587e8" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/app.js" afterPath="$PROJECT_DIR$/js/app.js" />
     </list>
@@ -17,19 +19,19 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="34" column="7" lean-forward="true" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+            <state relative-caret-position="480">
+              <caret line="32" column="22" lean-forward="true" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="449">
-                <caret line="33" column="33" lean-forward="false" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+              <first_editor relative-caret-position="431">
+                <caret line="34" column="24" lean-forward="false" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -37,21 +39,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1311">
-              <caret line="313" column="23" lean-forward="true" selection-start-line="313" selection-start-column="23" selection-end-line="313" selection-end-column="23" />
+            <state relative-caret-position="1259">
+              <caret line="287" column="68" lean-forward="false" selection-start-line="287" selection-start-column="68" selection-end-line="287" selection-end-column="68" />
               <folding>
-                <element signature="e#126#2018#0" expanded="false" />
-                <element signature="e#2270#4173#0" expanded="false" />
-                <element signature="e#4250#5674#0" expanded="false" />
                 <element signature="n#!!block;n#hideList#0" expanded="false" />
                 <element signature="n#!!block;n#showList#0" expanded="false" />
                 <element signature="n#!!block;n#filterListCategory#0" expanded="false" />
                 <element signature="n#!!block;n#filterListCuisine#0" expanded="false" />
-                <element signature="n#!!block;n#getPlaceDetails#0" expanded="false" />
-                <element signature="n#!!block;n#getRecommendationDetails#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -96,9 +93,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/css/styles.css" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/app.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -109,10 +106,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1304" />
-    <option name="y" value="63" />
-    <option name="width" value="1578" />
-    <option name="height" value="718" />
+    <option name="x" value="1344" />
+    <option name="y" value="106" />
+    <option name="width" value="1280" />
+    <option name="height" value="709" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -293,15 +290,15 @@
       <workItem from="1512004072928" duration="22859000" />
       <workItem from="1512588466400" duration="995000" />
       <workItem from="1512788667585" duration="11859000" />
-      <workItem from="1513204257060" duration="14769000" />
+      <workItem from="1513204257060" duration="19794000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52911000" />
+    <option name="totallyTimeSpent" value="57936000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1304" y="63" width="1578" height="718" extended-state="0" />
+    <frame x="1344" y="106" width="1280" height="709" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -316,7 +313,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20678514" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -344,16 +341,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/app.js</url>
-          <line>69</line>
+          <line>77</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/app.js</url>
-          <line>229</line>
+          <line>238</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/app.js</url>
+          <line>5</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -379,15 +382,10 @@
         <state relative-caret-position="3240">
           <caret line="356" column="59" lean-forward="false" selection-start-line="356" selection-start-column="59" selection-end-line="356" selection-end-column="59" />
           <folding>
-            <element signature="e#126#2018#0" expanded="false" />
-            <element signature="e#2270#4173#0" expanded="false" />
-            <element signature="e#4250#5674#0" expanded="false" />
             <element signature="n#!!block;n#hideList#0" expanded="false" />
             <element signature="n#!!block;n#showList#0" expanded="false" />
             <element signature="n#!!block;n#filterListCategory#0" expanded="false" />
             <element signature="n#!!block;n#filterListCuisine#0" expanded="false" />
-            <element signature="n#!!block;n#getPlaceDetails#0" expanded="false" />
-            <element signature="n#!!block;n#getRecommendationDetails#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -424,15 +422,10 @@
         <state relative-caret-position="375">
           <caret line="117" column="38" lean-forward="false" selection-start-line="117" selection-start-column="38" selection-end-line="117" selection-end-column="38" />
           <folding>
-            <element signature="e#126#2018#0" expanded="false" />
-            <element signature="e#2270#4173#0" expanded="false" />
-            <element signature="e#4250#5674#0" expanded="false" />
             <element signature="n#!!block;n#hideList#0" expanded="false" />
             <element signature="n#!!block;n#showList#0" expanded="false" />
             <element signature="n#!!block;n#filterListCategory#0" expanded="false" />
             <element signature="n#!!block;n#filterListCuisine#0" expanded="false" />
-            <element signature="n#!!block;n#getPlaceDetails#0" expanded="false" />
-            <element signature="n#!!block;n#getRecommendationDetails#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -458,15 +451,10 @@
         <state relative-caret-position="210">
           <caret line="14" column="16" lean-forward="true" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
           <folding>
-            <element signature="e#126#2018#0" expanded="false" />
-            <element signature="e#2270#4173#0" expanded="false" />
-            <element signature="e#4250#5674#0" expanded="false" />
             <element signature="n#!!block;n#hideList#0" expanded="false" />
             <element signature="n#!!block;n#showList#0" expanded="false" />
             <element signature="n#!!block;n#filterListCategory#0" expanded="false" />
             <element signature="n#!!block;n#filterListCuisine#0" expanded="false" />
-            <element signature="n#!!block;n#getPlaceDetails#0" expanded="false" />
-            <element signature="n#!!block;n#getRecommendationDetails#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -487,40 +475,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="449">
-            <caret line="33" column="33" lean-forward="false" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
-            <folding />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1259">
+          <caret line="287" column="68" lean-forward="false" selection-start-line="287" selection-start-column="68" selection-end-line="287" selection-end-column="68" />
+          <folding>
+            <element signature="n#!!block;n#hideList#0" expanded="false" />
+            <element signature="n#!!block;n#showList#0" expanded="false" />
+            <element signature="n#!!block;n#filterListCategory#0" expanded="false" />
+            <element signature="n#!!block;n#filterListCuisine#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="34" column="7" lean-forward="true" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+        <state relative-caret-position="480">
+          <caret line="32" column="22" lean-forward="true" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1311">
-          <caret line="313" column="23" lean-forward="true" selection-start-line="313" selection-start-column="23" selection-end-line="313" selection-end-column="23" />
-          <folding>
-            <element signature="e#126#2018#0" expanded="false" />
-            <element signature="e#2270#4173#0" expanded="false" />
-            <element signature="e#4250#5674#0" expanded="false" />
-            <element signature="n#!!block;n#hideList#0" expanded="false" />
-            <element signature="n#!!block;n#showList#0" expanded="false" />
-            <element signature="n#!!block;n#filterListCategory#0" expanded="false" />
-            <element signature="n#!!block;n#filterListCuisine#0" expanded="false" />
-            <element signature="n#!!block;n#getPlaceDetails#0" expanded="false" />
-            <element signature="n#!!block;n#getRecommendationDetails#0" expanded="false" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="431">
+            <caret line="34" column="24" lean-forward="false" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

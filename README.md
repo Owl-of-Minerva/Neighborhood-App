@@ -32,4 +32,4 @@ Users can specify the search radius, venue type and number of results. After tha
 Third Party API Used
 
 Foursquare venue recommendation  
-
+Foursquare venue details

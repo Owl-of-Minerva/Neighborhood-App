@@ -8,6 +8,7 @@ var initialLocations = [
         title: 'Tasty Subs & Pizza',
         position: {lat: 37.383162, lng: -121.995069},
         place_id: 'ChIJ9YoEpR-2j4ARO_aEnQAFS70',
+        foursquare_id: '4a70af81f964a52034d81fe3',
         types: ['restaurant'],
         cuisine: 'indian',
         visibility: true
@@ -16,6 +17,7 @@ var initialLocations = [
         title: "Inchin's Bamboo Garden",
         position: {lat: 37.376281, lng: -122.031072},
         place_id: 'ChIJDRdgSly2j4ARagXDhT9yhrQ',
+        foursquare_id:'53002fe7498e08072785bc04',
         types: ['restaurant'],
         cuisine: 'indian',
         visibility: true
@@ -24,6 +26,7 @@ var initialLocations = [
         title: "Sliderbar",
         position: {lat: 37.446152,lng: -122.160983},
         place_id: 'ChIJ-VM9uzm7j4ARA3OpSuevYAA',
+        foursquare_id:'4b649e2df964a520a1c22ae3',
         types: ['restaurant', 'cafe', 'bar'],
         cuisine: 'american',
         visibility: true
@@ -32,6 +35,7 @@ var initialLocations = [
         title: "Madras Cafe",
         position: {lat: 37.374284, lng: -122.054956},
         place_id: 'ChIJlbIO1Oi2j4ARp17Uf24xkHk',
+        foursquare_id:'4a96e6dcf964a520742720e3',
         types: ['restaurant', 'cafe'],
         cuisine: 'indian',
         visibility: true
@@ -40,6 +44,7 @@ var initialLocations = [
         title: "Jang Su Jang",
         position: {lat: 37.353713, lng: -121.994364},
         place_id: 'ChIJR-8-Fva1j4ARNOEp6OoFzKs',
+        foursquare_id:'',
         types: ['restaurant'],
         cuisine: 'korean',
         visibility: true
@@ -48,6 +53,7 @@ var initialLocations = [
         title: "Taste Good Beijing",
         position: {lat: 37.429539, lng: -121.907570},
         place_id: 'ChIJTRaT5inJj4ARQ6Z6L6nH_2Q',
+        foursquare_id:'',
         types: ['restaurant'],
         cuisine: 'chinese',
         visibility: true
@@ -56,6 +62,7 @@ var initialLocations = [
         title: "Mantra India",
         position: {lat: 37.392889, lng: -122.079855},
         place_id: 'ChIJ-0RVcTS3j4ARDEqD2bNEFrc',
+        foursquare_id:'59dc22b53abcaf2400cb9599',
         types: ['restaurant', 'bar'],
         cuisine: 'indian',
         visibility: true
@@ -64,6 +71,7 @@ var initialLocations = [
         title: "Passage to India",
         position: {lat: 37.394356, lng: -122.099594},
         place_id: 'ChIJPwgBGLmwj4ARdFm9VCwWsA8',
+        foursquare_id:'4ada7704f964a520ce2221e3',
         types: ['bakery'],
         cuisine: 'indian',
         visibility: true
@@ -97,6 +105,7 @@ var Marker = function(data){
         position: data.position,
         title: data.title,
         place_id: data.place_id,
+        foursquare_id: data.foursquare_id,
         types: data.types,
         cuisine: data.cuisine,
         icon: defaultIcon,
@@ -260,9 +269,40 @@ function getPlaceDetails(marker, infowindow) {
             innerHTML += '<br><br><img src="' + place.photos[0].getUrl(
                 {maxHeight: 100, maxWidth: 200}) + '">';
         }
-        innerHTML += '</div>';
-        infowindow.setContent(innerHTML);
-        infowindow.open(map, marker);
+
+        if(marker.foursquare_id !== ''){
+            var foursquareURL = 'https://api.foursquare.com/v2/venues/' + marker.foursquare_id
+                + '?&client_id=' + client_id + '&client_secret=' + client_secret + '&v=20171215';
+            console.log(foursquareURL);
+            $.getJSON(foursquareURL).done(function(data) {
+                var result = data.response.venue.menu;
+                console.log(result);
+                if (result){
+                    if (result.url){
+                        console.log(result.url);
+                        innerHTML += '<br><a href="' + result.url + '">Menu</a>';
+
+                    }
+                }
+                else{
+                    innerHTML += '<br> <span> Menu Info N/A</span>';
+                }
+            }).fail(function() {
+                alert("Error")
+            });
+        }
+        else{
+            innerHTML += '<br> <span> Menu Info N/A</span>';
+        }
+
+
+        window.setTimeout(function(){
+            innerHTML += '</div>';
+            infowindow.setContent(innerHTML);
+            infowindow.open(map, marker);
+        }, 1000);
+
+
         infowindow.addListener('closedclick', function(){
             infowindow.marker = null;
         });
